@@ -1,3 +1,3 @@
-## Practicing Spring Boot
+# Practicing Spring Boot
 
-# Simple Task Manager API
+## Simple Task Manager API
