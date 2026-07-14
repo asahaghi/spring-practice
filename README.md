@@ -33,8 +33,8 @@ spring.datasource.password=...
 
 ## API Endpoints
 
-GET    /api/tasks
-GET    /api/tasks/{id}
-POST   /api/tasks
-PUT    /api/tasks
-DELETE /api/tasks/{id}
+- GET    /api/tasks
+- GET    /api/tasks/{id}
+- POST   /api/tasks
+- PUT    /api/tasks
+- DELETE /api/tasks/{id}
