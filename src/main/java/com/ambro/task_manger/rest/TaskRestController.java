@@ -26,7 +26,7 @@ public class TaskRestController {
     public Task findById(@PathVariable int taskId) {
         Task theTask = taskService.findById(taskId);
         if (theTask == null) {
-            throw new RuntimeException("Task not found");
+            throw new TaskNotFoundException("Task "+ taskId+" not found");
         }
         return theTask;
     }
@@ -44,11 +44,11 @@ public class TaskRestController {
         return dbTask;
     }
 
-    @DeleteMapping("tasks/{taskId}")
+    @DeleteMapping("/tasks/{taskId}")
     public String delete(@PathVariable int taskId) {
         Task task = taskService.findById(taskId);
         if (task == null) {
-            throw new RuntimeException("Task not found");
+            throw new TaskNotFoundException("Task "+ taskId+" not found");
         }
         taskService.deleteById(taskId);
         return "Task deleted" + taskId;

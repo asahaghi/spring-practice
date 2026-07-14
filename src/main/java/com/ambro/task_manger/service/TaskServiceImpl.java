@@ -2,6 +2,7 @@ package com.ambro.task_manger.service;
 
 import com.ambro.task_manger.dao.TaskRepository;
 import com.ambro.task_manger.entity.Task;
+import com.ambro.task_manger.rest.TaskNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class TaskServiceImpl implements TaskService {
             task = result.get();
         }
         else{
-            throw new RuntimeException("Task not found");
+            throw new TaskNotFoundException("Task " + id + " not found");
         }
         return task;
     }

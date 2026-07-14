@@ -1,11 +1,21 @@
 package com.ambro.task_manger.entity;
 
 import jakarta.persistence.*;
+import jdk.jshell.Snippet;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.context.annotation.Primary;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
 public class Task {
+    public enum Status {
+        TODO,
+        IN_PROGRESS,
+        DONE
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -14,8 +24,17 @@ public class Task {
     private String title;
     @Column(name = "description")
     private String description;
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private Status status;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
 
     public Task() {
@@ -45,12 +64,28 @@ public class Task {
         this.description = description;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
@@ -59,7 +94,9 @@ public class Task {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }
