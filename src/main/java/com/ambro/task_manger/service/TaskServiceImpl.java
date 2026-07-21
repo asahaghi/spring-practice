@@ -3,10 +3,14 @@ package com.ambro.task_manger.service;
 import com.ambro.task_manger.dao.TaskRepository;
 import com.ambro.task_manger.entity.Task;
 import com.ambro.task_manger.rest.TaskNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -43,4 +47,11 @@ public class TaskServiceImpl implements TaskService {
     public void deleteById(int id) {
         taskRepository.deleteById(id);
     }
+
+    @Override
+    public Page<Task> findAll(Pageable pageable) {
+        return taskRepository.findAll(pageable);
+    }
+
+
 }

@@ -1,9 +1,14 @@
 package com.ambro.task_manger.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import jdk.jshell.Snippet;
+import org.aspectj.bridge.IMessage;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.jspecify.annotations.NonNull;
+import org.springframework.boot.convert.DataSizeUnit;
 import org.springframework.context.annotation.Primary;
 
 import java.time.LocalDateTime;
@@ -20,6 +25,9 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    @NotBlank(message = "Title is Required")
+    @Size(min = 3, max = 60, message = "title length is incorrect.")
     @Column(name = "title")
     private String title;
     @Column(name = "description")
